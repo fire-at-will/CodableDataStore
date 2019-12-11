@@ -7,7 +7,7 @@
 //
 
 import Foundation
-class CodableDataStore<T: Codable> {
+public class CodableDataStore<T: Codable> {
     
     /// Engine used to
     private var engine: CodableDataStoreEngine?
@@ -25,7 +25,7 @@ class CodableDataStore<T: Codable> {
      * - Parameters:
      *      - engine: The DAO object that writes the codables to the data store. Defaults to using _User Defaults_.
      */
-    init(engine: CodableDataStoreEngine = CodableDataStoreEngineUserDefaults()){
+    public init(engine: CodableDataStoreEngine = CodableDataStoreEngineUserDefaults()){
         self.engine = engine
     }
    
@@ -42,7 +42,7 @@ class CodableDataStore<T: Codable> {
     *
     * - Throws: If the create action fails.
     */
-    func create(withID id: String, codable: T) throws {
+    public func create(withID id: String, codable: T) throws {
         try engine?.create(withID: id, codable: codable)
     }
     
@@ -58,7 +58,7 @@ class CodableDataStore<T: Codable> {
      * - Returns:
      *      - The codable object, if found.
      */
-    func read(withId id: String) throws -> T? {
+    public func read(withId id: String) throws -> T? {
         try engine?.read(withId: id)
     }
     
@@ -74,7 +74,7 @@ class CodableDataStore<T: Codable> {
      *
      * - Throws: If an IO error occurs of if the provided ID is not found.
      */
-    func update(codableWithID id: String, withCodable newCodable: T) throws {
+    public func update(codableWithID id: String, withCodable newCodable: T) throws {
         try engine?.update(codableWithID: id, withCodable: newCodable)
     }
     
@@ -92,7 +92,7 @@ class CodableDataStore<T: Codable> {
      *
      * - Throws: If an IO error occurs.
      */
-    func updateOrInsert(codableWithID id: String, withCodable newCodable: T) throws {
+    public func updateOrInsert(codableWithID id: String, withCodable newCodable: T) throws {
         try engine?.updateOrCreate(codableWithID: id, withCodable: newCodable)
     }
     
@@ -107,7 +107,7 @@ class CodableDataStore<T: Codable> {
      * - Parameters:
      *      - id: The ID of the codable to delete.
      */
-    func delete(codableWithID id: String, withType type: T.Type) throws {
+    public func delete(codableWithID id: String, withType type: T.Type) throws {
         try engine?.delete(codableWithID: id, withType: type)
     }
     
@@ -119,7 +119,7 @@ class CodableDataStore<T: Codable> {
      *
      * - Returns: A list of all IDs
      */
-    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]? {
+    public func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]? {
         return try engine?.fetchAllIDs(ofType: type)
     }
     
@@ -131,7 +131,7 @@ class CodableDataStore<T: Codable> {
      *
      * - Returns: A dictionary containing the keys and values for the codables contained in the data store.
      */
-    func fetchAllEntries<T: Codable>(ofType type: T.Type) throws -> [String: T?] {
+    public func fetchAllEntries<T: Codable>(ofType type: T.Type) throws -> [String: T?] {
         return try engine?.fetchAllEntries(ofType: type) ?? [:]
     }
 }
