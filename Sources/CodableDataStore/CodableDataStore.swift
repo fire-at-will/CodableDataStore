@@ -119,7 +119,9 @@ class CodableDataStore<T: Codable> {
      *
      * - Returns: A list of all IDs
      */
-    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]
+    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]? {
+        return try engine?.fetchAllIDs(ofType: type)
+    }
     
     /**
      * Retrieves a dictionary containing all IDs and values in the data store for the codable type.
@@ -129,5 +131,7 @@ class CodableDataStore<T: Codable> {
      *
      * - Returns: A dictionary containing the keys and values for the codables contained in the data store.
      */
-    func fetchAllEntries<T: Codable>(ofType type: T.Type) throws -> [String: T?]
+    func fetchAllEntries<T: Codable>(ofType type: T.Type) throws -> [String: T?] {
+        return try engine?.fetchAllEntries(ofType: type) ?? [:]
+    }
 }
