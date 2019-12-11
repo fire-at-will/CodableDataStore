@@ -89,7 +89,7 @@ public protocol CodableDataStoreEngine {
      *
      * - Returns: A list of all IDs
      */
-    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]
+    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> Set<String>
     
     /**
      * Retrieves a dictionary containing all IDs and values in the data store for the codable type.

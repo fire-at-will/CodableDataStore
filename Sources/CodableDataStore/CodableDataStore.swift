@@ -123,7 +123,7 @@ public class CodableDataStore<T: Codable> {
      *
      * - Returns: A list of all IDs
      */
-    public func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]? {
+    public func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> Set<String>? {
         return try engine?.fetchAllIDs(ofType: type)
     }
     

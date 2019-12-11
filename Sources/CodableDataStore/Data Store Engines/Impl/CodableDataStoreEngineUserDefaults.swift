@@ -66,13 +66,13 @@ class CodableDataStoreEngineUserDefaults: CodableDataStoreEngine {
         userDefaults?.synchronize()
     }
     
-    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String] {
+    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> Set<String> {
         let keysInDataStore: [String] = userDefaults?.dictionaryRepresentation().keys.map({key in return key}) ?? []
-        var allIDs: [String] = []
+        var allIDs: Set<String> = Set([])
         
         for key: String in keysInDataStore {
             if key.starts(with: String(describing: type)) {
-                allIDs.append(
+                allIDs.insert(
                     getBaseIDFromTypedID(typedID: key, type: type)
                 )
             }
