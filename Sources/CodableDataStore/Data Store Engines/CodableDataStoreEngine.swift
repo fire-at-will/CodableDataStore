@@ -79,7 +79,7 @@ protocol CodableDataStoreEngine {
      * - Parameters:
      *      - id: The ID of the codable to delete.
      */
-    func delete(codableWithID id: String) throws
+    func delete<T: Codable>(codableWithID id: String, withType: T.Type) throws
     
     /**
      * List all IDs in the data store that are associated with this codable.
@@ -89,7 +89,7 @@ protocol CodableDataStoreEngine {
      *
      * - Returns: A list of all IDs
      */
-    func fetchAllIDs() -> [String] throws
+    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]
     
     /**
      * Retrieves a dictionary containing all IDs and values in the data store for the codable type.
@@ -99,5 +99,5 @@ protocol CodableDataStoreEngine {
      *
      * - Returns: A dictionary containing the keys and values for the codables contained in the data store.
      */
-    func fetchAllEntries<T: Codable>() throws -> Dictionary<String, T>
+    func fetchAllEntries<T: Codable>(ofType type: T.Type) throws -> [String: T?]
 }

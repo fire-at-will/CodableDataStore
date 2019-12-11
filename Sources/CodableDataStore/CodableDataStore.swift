@@ -42,7 +42,7 @@ class CodableDataStore<T: Codable> {
     *
     * - Throws: If the create action fails.
     */
-    func create<T: Codable>(withID id: String, codable: T) throws {
+    func create(withID id: String, codable: T) throws {
         try engine?.create(withID: id, codable: codable)
     }
     
@@ -74,7 +74,7 @@ class CodableDataStore<T: Codable> {
      *
      * - Throws: If an IO error occurs of if the provided ID is not found.
      */
-    func update<T: Codable>(codableWithID id: String, withCodable newCodable: T) throws {
+    func update(codableWithID id: String, withCodable newCodable: T) throws {
         try engine?.update(codableWithID: id, withCodable: newCodable)
     }
     
@@ -92,7 +92,7 @@ class CodableDataStore<T: Codable> {
      *
      * - Throws: If an IO error occurs.
      */
-    func updateOrInsert<T: Codable>(codableWithID id: String, withCodable newCodable: T) throws {
+    func updateOrInsert(codableWithID id: String, withCodable newCodable: T) throws {
         try engine?.updateOrCreate(codableWithID: id, withCodable: newCodable)
     }
     
@@ -107,7 +107,27 @@ class CodableDataStore<T: Codable> {
      * - Parameters:
      *      - id: The ID of the codable to delete.
      */
-    func delete(codableWithID id: String) throws {
-        try engine?.delete(codableWithID: id)
+    func delete(codableWithID id: String, withType type: T.Type) throws {
+        try engine?.delete(codableWithID: id, withType: type)
     }
+    
+    /**
+     * List all IDs in the data store that are associated with this codable.
+     *
+     * - Author: Will Taylor
+     * - Date: 12/8/2019
+     *
+     * - Returns: A list of all IDs
+     */
+    func fetchAllIDs<T: Codable>(ofType type: T.Type) throws -> [String]
+    
+    /**
+     * Retrieves a dictionary containing all IDs and values in the data store for the codable type.
+     *
+     * - Author: Will Taylor
+     * - Date: 12/8/2019
+     *
+     * - Returns: A dictionary containing the keys and values for the codables contained in the data store.
+     */
+    func fetchAllEntries<T: Codable>(ofType type: T.Type) throws -> [String: T?]
 }
