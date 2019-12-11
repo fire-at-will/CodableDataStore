@@ -10,7 +10,7 @@
 //
 
 import Foundation
-protocol CodableDataStoreEngine {
+public protocol CodableDataStoreEngine {
     
    /**
     * Persists a new codable in the data store.

@@ -25,8 +25,12 @@ public class CodableDataStore<T: Codable> {
      * - Parameters:
      *      - engine: The DAO object that writes the codables to the data store. Defaults to using _User Defaults_.
      */
-    public init(engine: CodableDataStoreEngine = CodableDataStoreEngineUserDefaults()){
-        self.engine = engine
+    public init(engine: CodableDataStoreEngine? = nil){
+        if engine == nil {
+            self.engine = CodableDataStoreEngineUserDefaults()
+        } else {
+            self.engine = engine
+        }
     }
    
     // MARK - Public API
